@@ -3,6 +3,7 @@ package com.f1proyect.aplicacion.servicios;
 import java.util.List;
 import java.util.Optional;
 
+import com.f1proyect.dominio.modelos.ConfiVehiculo;
 import com.f1proyect.dominio.modelos.Piloto;
 import com.f1proyect.dominio.modelos.Vehiculo;
 import com.f1proyect.dominio.puertos.in.GestionVehiculoUseCase;
@@ -70,5 +71,10 @@ public class VehiculoServicio implements GestionVehiculoUseCase {
     @Override
     public List<Vehiculo> compararVehiculos(List<Vehiculo> vehiculos) {
         return vehiculos;
+    }
+
+    @Override
+    public void configurarVehiculo(Vehiculo vehiculo, ConfiVehiculo configuracion) {
+    vehiculo.setConfiguracion(configuracion);
     }
 }

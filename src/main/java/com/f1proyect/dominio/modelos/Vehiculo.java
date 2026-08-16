@@ -1,5 +1,8 @@
 package com.f1proyect.dominio.modelos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Vehiculo {
     private String equipo;
     private String modelo;
@@ -8,6 +11,8 @@ public class Vehiculo {
     private double aceleracion0100;
     private double consumoBase;    // litros por vuelta, condicion seca / modo normal
     private double desgasteBase;   // % de desgaste de neumaticos por vuelta, condicion seca / modo normal
+    private ConfiVehiculo configuracion; // puede quedar en null hasta que se configure
+    private final List<Piloto> pilotosAsignados;
 
     // constructor 
     public Vehiculo(String equipo, String modelo, String motor, double velocidadMaximaKmh,double aceleracion0100, double consumoBase, double desgasteBase) {
@@ -18,6 +23,7 @@ public class Vehiculo {
         this.aceleracion0100 = aceleracion0100;
         this.consumoBase = consumoBase;
         this.desgasteBase = desgasteBase;
+        this.pilotosAsignados = new ArrayList<>();
     }
 
     // metodos getter y setter
@@ -63,6 +69,14 @@ public class Vehiculo {
     public void setDesgasteBase(double desgasteBase) { 
         this.desgasteBase = desgasteBase; 
     }
+    public ConfiVehiculo getConfiguracion() { 
+        return configuracion; 
+    }
+    public void setConfiguracion(ConfiVehiculo configuracion) { 
+        this.configuracion = configuracion; 
+    }
+    public List<Piloto> getPilotosAsignados() { return pilotosAsignados; }
+    public void agregarPiloto(Piloto piloto) { this.pilotosAsignados.add(piloto); }
 
     // metodo que sobreescribe el constructor
     @Override

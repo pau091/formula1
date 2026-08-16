@@ -2,6 +2,7 @@ package com.f1proyect.dominio.puertos.in;
 
 import java.util.List;
 
+import com.f1proyect.dominio.modelos.ConfiVehiculo;
 import com.f1proyect.dominio.modelos.Piloto;
 import com.f1proyect.dominio.modelos.Vehiculo;
 
@@ -27,4 +28,7 @@ public interface GestionVehiculoUseCase {
 
     // Comparar dos o más vehículos
     List<Vehiculo> compararVehiculos(List<Vehiculo> vehiculos);
+
+    // Configurar (o reconfigurar) los parámetros de manejo de un vehículo
+    void configurarVehiculo(Vehiculo vehiculo, ConfiVehiculo configuracion);
 }
