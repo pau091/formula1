@@ -10,7 +10,7 @@ public class Circuito {
     private String recordTiempo;
     private String recordPiloto;
 
-    // constructor
+    // Constructor con los 8 parámetros
     public Circuito(int id, String nombre, String pais, double longitudKm, int vueltas, String descripcion, String recordTiempo, String recordPiloto) {
         this.id = id;
         this.nombre = nombre;
@@ -22,7 +22,7 @@ public class Circuito {
         this.recordPiloto = recordPiloto;
     }
 
-    // metodos getter y setter
+    // Métodos Getter y Setter
     public int getId() {
         return id;
     }
@@ -72,7 +72,7 @@ public class Circuito {
         this.recordPiloto = recordPiloto;
     }
 
-    // metodo toString
+    // Método toString
     @Override
     public String toString() {
         return nombre + " - " + pais + " (" + longitudKm + " km, " + vueltas + " vueltas)";
