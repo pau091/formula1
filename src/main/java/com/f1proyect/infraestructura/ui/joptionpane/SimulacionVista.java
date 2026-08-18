@@ -1,13 +1,12 @@
 package com.f1proyect.infraestructura.ui.joptionpane;
 
+import javax.swing.JOptionPane;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
+import com.f1proyect.aplicacion.servicios.CircuitoServicio;
 import com.f1proyect.aplicacion.servicios.SimulacionServicio;
 import com.f1proyect.aplicacion.servicios.VehiculoServicio;
 import com.f1proyect.dominio.modelos.Circuito;
-import com.f1proyect.dominio.modelos.Clima;
 import com.f1proyect.dominio.modelos.ResultClasificacion;
 import com.f1proyect.dominio.modelos.Vehiculo;
 
@@ -15,10 +14,13 @@ public class SimulacionVista {
 
     private final SimulacionServicio simulacionServicio;
     private final VehiculoServicio vehiculoServicio;
+    private final CircuitoServicio circuitoServicio;
 
-    public SimulacionVista(SimulacionServicio simulacionServicio, VehiculoServicio vehiculoServicio) {
+    public SimulacionVista(SimulacionServicio simulacionServicio, VehiculoServicio vehiculoServicio,
+                            CircuitoServicio circuitoServicio) {
         this.simulacionServicio = simulacionServicio;
         this.vehiculoServicio = vehiculoServicio;
+        this.circuitoServicio = circuitoServicio;
     }
 
     public void mostrarMenu() {
@@ -40,18 +42,23 @@ public class SimulacionVista {
 
     private void ejecutarClasificacion() {
         List<Vehiculo> vehiculos = vehiculoServicio.listarVehiculos();
-
         if (vehiculos.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay vehiculos registrados todavia.");
             return;
         }
 
-        // TEMPORAL: circuito de prueba mientras el CircuitoServicio de tu compañero no esta listo.
-        // Cuando el termine, reemplazar por un circuito real elegido desde su servicio.
-        Circuito circuitoPrueba = new Circuito("Monza", "Italia", 5.79, 53,
-                "Circuito rapido de Italia", Clima.SECO);
+        List<Circuito> circuitos = circuitoServicio.listarCircuitos();
+        if (circuitos.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "No hay circuitos registrados todavia. Pidele a tu compañera que registre uno primero.");
+            return;
+        }
 
-        List<ResultClasificacion> resultados = simulacionServicio.ejecutarClasificacion(vehiculos, circuitoPrueba);
+        Circuito circuito = (Circuito) JOptionPane.showInputDialog(null, "Elige un circuito:", "Simulacion",
+                JOptionPane.QUESTION_MESSAGE, null, circuitos.toArray(), circuitos.get(0));
+        if (circuito == null) return;
+
+        List<ResultClasificacion> resultados = simulacionServicio.ejecutarClasificacion(vehiculos, circuito);
 
         if (resultados.isEmpty()) {
             JOptionPane.showMessageDialog(null,
